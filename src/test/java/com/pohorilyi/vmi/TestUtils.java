@@ -31,7 +31,7 @@ class TestUtils {
 
     static Drink createTestDrink(MockMvc mockMvc, SaveDrinkRequest saveDrinkRequest) throws Exception {
         String postResult = mockMvc
-                .perform(post("/inventory")
+                .perform(post("/drinks")
                         .content(asJsonString(saveDrinkRequest))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

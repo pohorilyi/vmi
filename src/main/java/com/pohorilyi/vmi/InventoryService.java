@@ -21,18 +21,14 @@ public class InventoryService {
         return drinkRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    Drink getDrinkByName(String name) {
-        return drinkRepository.findByName(name).orElseThrow(EntityNotFoundException::new);
-    }
-
     Drink createDrink(SaveDrinkRequest drinkRequest) {
         drinkValidator.validateBeforeCreate(drinkRequest);
         return drinkRepository.save(createDrinkEntity(drinkRequest));
     }
 
     Drink updateDrink(Long id, SaveDrinkRequest saveDrinkRequest) {
-        drinkValidator.validateBeforeUpdate(saveDrinkRequest);
         Drink found = getDrinkById(id);
+        drinkValidator.validateBeforeUpdate(saveDrinkRequest);
         found.setName(saveDrinkRequest.getName());
         found.setAmount(saveDrinkRequest.getAmount());
         found.setVolume(saveDrinkRequest.getVolume());
@@ -41,7 +37,8 @@ public class InventoryService {
     }
 
     void deleteDrink(Long id) {
-        drinkRepository.deleteById(id);
+        Drink toBeDeleted = getDrinkById(id);
+        drinkRepository.delete(toBeDeleted);
     }
 
     private Drink createDrinkEntity(SaveDrinkRequest drinkRequest) {

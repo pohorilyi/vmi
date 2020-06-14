@@ -30,11 +30,11 @@ public class DrinkValidator {
 
     private void checkNulls(SaveDrinkRequest request) {
         if (request.getName() == null) {
-            throw new DrinkValidationException("Name can't be null");
+            throw new DrinkValidationException("Name should not be null");
         } else if (request.getVolume() == null) {
-            throw new DrinkValidationException("Volume can't be null");
+            throw new DrinkValidationException("Volume should not be null");
         } else if (request.getAmount() == null) {
-            throw new DrinkValidationException("Amount can't be null");
+            throw new DrinkValidationException("Amount should not be null");
         }
     }
 
